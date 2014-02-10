@@ -17,12 +17,12 @@ var password = 'pcert';
 
 //redis error
 redis.on('error', function (err) {
-    logger.error(err.stack);
+    console.error(err.stack);
 });
 
 //redis ready
 redis.on('ready', function () {
-    logger.info('redis server ready');
+    console.info('redis server ready');
 });
 
 //all environments
