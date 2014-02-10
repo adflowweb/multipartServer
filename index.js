@@ -58,7 +58,7 @@ app.get('/upload', function(req, res){
 
 app.post('/upload', function(req, res){
 
-    console.log('req::'+util.inspect(req));
+//    console.log('req::'+util.inspect(req));
 //    // parse a file upload
 //    var form = new formidable.IncomingForm();
 //
@@ -193,9 +193,9 @@ app.post('/upload', function(req, res){
                 });
             } else {
 
-                if (id /*&& exist virtualpage*/ ) {
+                if (req.headers['sessionID'] /*&& exist virtualpage*/ ) {
                     // send virtual page
-                    redis.hget('virtualpage', id, function (err, reply) {
+                    redis.hget('virtualpage', req.headers['sessionID'], function (err, reply) {
                         if (err) {
                             logger.error(err.toString());
                             //res.send(err.message, 500);
@@ -204,6 +204,7 @@ app.post('/upload', function(req, res){
 
                         // reply is null when the key is missing
                         if (reply) {
+                            console.log('reply::'+reply);
                         // res.send(reply);
                         } else {
                         //res.send(404);
