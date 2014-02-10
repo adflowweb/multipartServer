@@ -192,29 +192,29 @@ app.post('/upload', function(req, res){
                     }
                 });
             } else {
-                console.log('sessionID'+req.headers['sessionID']);
-                if (req.headers['sessionID'] /*&& exist virtualpage*/ ) {
-                    // send virtual page
-                    redis.hget('virtualpage', req.headers['sessionID'], function (err, reply) {
-                        if (err) {
-                            console.error(err.toString());
-                            //res.send(err.message, 500);
-                            return;
-                        }
-
-                        // reply is null when the key is missing
-                        if (reply) {
-                            console.log('reply::'+reply);
-                        // res.send(reply);
-                        } else {
-                        //res.send(404);
-                        }
-
-                        disconnect();
-                    });
-                } else {
+//                console.log('sessionID'+req.headers['sessionID']);
+//                if (req.headers['sessionID'] /*&& exist virtualpage*/ ) {
+//                    // send virtual page
+//                    redis.hget('virtualpage', req.headers['sessionID'], function (err, reply) {
+//                        if (err) {
+//                            console.error(err.toString());
+//                            //res.send(err.message, 500);
+//                            return;
+//                        }
+//
+//                        // reply is null when the key is missing
+//                        if (reply) {
+//                            console.log('reply::'+reply);
+//                        // res.send(reply);
+//                        } else {
+//                        //res.send(404);
+//                        }
+//
+//                        disconnect();
+//                    });
+//                } else {
                     disconnect();
-                }
+//                }
             }
         }
 
