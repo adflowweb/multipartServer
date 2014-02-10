@@ -209,7 +209,8 @@ app.post('/upload', function(req, res){
 
                         // reply is null when the key is missing
                         if (reply) {
-                            //console.log('reply::'+reply);
+                            console.log('reply::'+reply);
+                            console.log('severdom::'+keys+'/server.dom');
                             ftp.put(reply, keys+'/server.dom', function(hadError) {
                                 if (hadError)
                                 {
