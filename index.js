@@ -9,17 +9,17 @@ var app = express();
 var util = require('util');
 var JSFtp = require("jsftp");
 
-var hostName = '';
+var hostName = '192.168.1.57';
 var portNum = 21;
-var userName =  "vmuser"
-var password = "passw0rd"
+var userName = 'pcert';
+var password = 'pcert';
 
 //all environments
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.logger());
 //app.use(rawBody);
-app.use(express.bodyParser({ keepExtensions: true, uploadDir: '/Users/nadir93/Downloads' }));
+app.use(express.bodyParser({ keepExtensions: true, uploadDir: '/home/master/nodejs/upload' }));
 app.use(function(req, res, next){
     if (req.is('text/*')) {
         req.text = '';
