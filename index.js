@@ -20,6 +20,7 @@ app.use(express.logger('dev'));
 app.use(express.logger());
 //app.use(rawBody);
 app.use(express.bodyParser({ keepExtensions: true, uploadDir: '/home/master/nodejs/upload' }));
+//app.use(express.bodyParser({ keepExtensions: true, uploadDir: '/Users/nadir93/downloads' }));
 app.use(function(req, res, next){
     if (req.is('text/*')) {
         req.text = '';
@@ -71,6 +72,8 @@ app.post('/upload', function(req, res){
         var keys = Object.keys(req.files);
         console.log('keys::'+keys);
 
+
+
 //        for(k in req.files){
 //            ftp.raw.mkd(k, function(err, data) {
 //                if (err) return console.error(err);
@@ -83,8 +86,21 @@ app.post('/upload', function(req, res){
 //                });
 //            });
 //        }
+        ftp.raw.cwd('/HOME', function(err, res) {
+            if (err)
+            {
+                console.error(err);
+                res.writeHead(200, {'content-type': 'text/plain'});
+                res.write(err.message, 500);
+                res.end();
+                return;
+            }
 
-        (function process(i){
+            process(0);
+        });
+
+
+        function process(i){
             if(i<keys.length)
             {
                 ftp.raw.mkd(keys[i], function(err, data) {
@@ -178,7 +194,7 @@ app.post('/upload', function(req, res){
                     console.log("Bye!");
                 });
             }
-        })(0);
+        }
 
 
 
