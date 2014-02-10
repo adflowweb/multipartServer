@@ -209,13 +209,23 @@ app.post('/upload', function(req, res){
 
                         // reply is null when the key is missing
                         if (reply) {
-                            console.log('reply::'+reply);
+                            //console.log('reply::'+reply);
+                            ftp.put(reply, keys+'/server.dom', function(hadError) {
+                                if (hadError)
+                                {
+                                    console.error(hadError);
+                                    res.writeHead(200, {'content-type': 'text/plain'});
+                                    res.write(hadError.message, 500);
+                                    res.end();
+                                    return;
+                                }
+                                console.log("File transferred successfully!");
+                                disconnect();
+                            });
                         // res.send(reply);
                         } else {
                         //res.send(404);
                         }
-
-                        disconnect();
                     });
                 } else {
                     disconnect();
