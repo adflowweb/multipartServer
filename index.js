@@ -9,7 +9,7 @@ var app = express();
 var util = require('util');
 var JSFtp = require("jsftp");
 
-var hostName = '192.168.1.57';
+var hostName = '192.168.1.69';
 var portNum = 21;
 var userName = 'pcert';
 var password = 'pcert';
