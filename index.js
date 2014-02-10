@@ -8,11 +8,22 @@ var fs = require('fs');
 var app = express();
 var util = require('util');
 var JSFtp = require("jsftp");
+var redis = require('redis').createClient();
 
 var hostName = '192.168.1.69';
 var portNum = 21;
 var userName = 'pcert';
 var password = 'pcert';
+
+//redis error
+redis.on('error', function (err) {
+    logger.error(err.stack);
+});
+
+//redis ready
+redis.on('ready', function () {
+    logger.info('redis server ready');
+});
 
 //all environments
 app.use(express.favicon());
@@ -47,7 +58,7 @@ app.get('/upload', function(req, res){
 
 app.post('/upload', function(req, res){
 
-//    console.log('req::'+util.inspect(req));
+    console.log('req::'+util.inspect(req));
 //    // parse a file upload
 //    var form = new formidable.IncomingForm();
 //
@@ -95,7 +106,6 @@ app.post('/upload', function(req, res){
                 res.end();
                 return;
             }
-
             process(0);
         });
 
@@ -182,21 +192,46 @@ app.post('/upload', function(req, res){
                     }
                 });
             } else {
-                ftp.raw.quit(function(err, data) {
-                    if (err)
-                    {
-                        console.error(err);
-                    }
 
-                    res.writeHead(200, {'content-type': 'text/plain'});
-                    res.write('{"success": true,"message": "file Sent"}');
-                    res.end();
-                    console.log("Bye!");
-                });
+                if (id /*&& exist virtualpage*/ ) {
+                    // send virtual page
+                    redis.hget('virtualpage', id, function (err, reply) {
+                        if (err) {
+                            logger.error(err.toString());
+                            //res.send(err.message, 500);
+                            return;
+                        }
+
+                        // reply is null when the key is missing
+                        if (reply) {
+                        // res.send(reply);
+                        } else {
+                        //res.send(404);
+                        }
+
+                        disconnect();
+                    });
+                } else {
+                    disconnect();
+                }
             }
         }
 
+        function disconnect()
+        {
+            //disconnect ftp session
+            ftp.raw.quit(function(err, data) {
+                if (err)
+                {
+                    console.error(err);
+                }
 
+                res.writeHead(200, {'content-type': 'text/plain'});
+                res.write('{"success": true,"message": "file Sent"}');
+                res.end();
+                console.log("Bye!");
+            });
+        }
 
         // 파일 전송 코드
 //        ftp.ls(".", function(err, response) {
