@@ -10,10 +10,15 @@ var util = require('util');
 var JSFtp = require("jsftp");
 var redis = require('redis').createClient();
 
-var hostName = '192.168.1.69';
+//var hostName = '192.168.1.69';
+//var portNum = 21;
+//var userName = 'pcert';
+//var password = 'pcert';
+
+var hostName = '192.168.1.45';
 var portNum = 21;
-var userName = 'pcert';
-var password = 'pcert';
+var userName = 'root';
+var password = 'root';
 
 //redis error
 redis.on('error', function (err) {
@@ -97,7 +102,7 @@ app.post('/upload', function(req, res){
 //                });
 //            });
 //        }
-        ftp.raw.cwd('/HOME', function(err, res) {
+        ftp.raw.cwd(/*'/HOME'*/ '/root/upload', function(err, res) {
             if (err)
             {
                 console.error(err);
