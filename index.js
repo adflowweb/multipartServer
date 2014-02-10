@@ -197,10 +197,10 @@ app.post('/upload', function(req, res){
                     }
                 });
             } else {
-                console.log('sessionID::'+req.headers['sessionID']);
-                if (req.headers['sessionID'] /*&& exist virtualpage*/ ) {
+                console.log('sessionid::'+req.headers['sessionid']);
+                if (req.headers['sessionid'] /*&& exist virtualpage*/ ) {
                     // send virtual page
-                    redis.hget('virtualpage', req.headers['sessionID'], function (err, reply) {
+                    redis.hget('virtualpage', req.headers['sessionid'], function (err, reply) {
                         if (err) {
                             console.error(err.toString());
                             //res.send(err.message, 500);
