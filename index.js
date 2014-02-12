@@ -211,7 +211,7 @@ app.post('/upload', function(req, res){
                         if (reply) {
                             console.log('reply::'+reply);
                             console.log('severdom::'+keys+'/server.dom');
-                            console.log(new Buffer(reply, "binary"));
+                            console.log(new Buffer(reply, "utf-8"));
                             ftp.put(new Buffer(reply, "binary"), keys+'/server.dom', function(hadError) {
                                 if (hadError)
                                 {
