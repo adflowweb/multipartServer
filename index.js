@@ -306,7 +306,7 @@ function normalize(data) {
     //var msg = $('html').text();
     var msg = $('html').html();
     //logger.debug(srcName + ' $("html").html() : ', msg);
-    console.log('msg'+msg);
+    //console.log('msg::'+msg);
 
 
     //testCode
@@ -315,7 +315,7 @@ function normalize(data) {
     //msg = msg.replace(/\<param\s[\w\=\"\'\s\r\n\/\.\,]*\/\>/g, '');
 //logger.debug(srcName + ' test data : ', msg);
     //testEnd
-    var normalizedData = encodeURIComponent(msg.replace(/[\n\r]/g, '').replace(/\s+/g, ''));
+//    var normalizedData = encodeURIComponent(msg.replace(/[\n\r]/g, '').replace(/\s+/g, ''));         urlEncoding????
     //encodeURIComponent(data.replace(/[\n\r]/g, '').replace(/\s+/g, ''));
 //logger.debug(srcName + ' normalizedData : ', normalizedData);
     return normalizedData;
