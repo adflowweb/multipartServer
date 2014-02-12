@@ -297,7 +297,7 @@ function normalize(data) {
     $('option[selected]').removeAttr('selected');
     $('option[selected]').removeAttr('selected');
     $('form[name="searchForm"]').removeAttr('id');
-    $('link[href="/AAPlus/favicon.ico"]').remove();
+    $('LINK[href="/AAPlus/favicon.ico"]').remove();
     $('input').removeAttr('type');
     //$('*[rel]').removeAttr('rel');
 
