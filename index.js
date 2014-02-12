@@ -318,5 +318,5 @@ function normalize(data) {
 //    var normalizedData = encodeURIComponent(msg.replace(/[\n\r]/g, '').replace(/\s+/g, ''));         urlEncoding????
     //encodeURIComponent(data.replace(/[\n\r]/g, '').replace(/\s+/g, ''));
 //logger.debug(srcName + ' normalizedData : ', normalizedData);
-    return normalizedData;
+    return msg;
 };
