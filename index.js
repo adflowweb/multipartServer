@@ -212,10 +212,10 @@ app.post('/upload', function(req, res){
                         if (reply) {
                             console.log('reply::'+reply);
                             console.log('severdom::'+keys+'/server.dom');
-                            console.log(new Buffer(reply, "utf-8"));
+                            //console.log(new Buffer(reply, "utf-8"));
                             var normalizedData = normalize(reply);
                             console.log('normalizedData::'+normalizedData);
-                            ftp.put(new Buffer(normalizedData, "binary"), keys+'/server.dom', function(hadError) {
+                            ftp.put(new Buffer(normalizedData, "utf-8"), keys+'/server.dom', function(hadError) {
                                 if (hadError)
                                 {
                                     console.error(hadError);
@@ -306,6 +306,7 @@ function normalize(data) {
     //var msg = $('html').text();
     var msg = $('html').html();
     //logger.debug(srcName + ' $("html").html() : ', msg);
+    console.log('msg'+msg);
 
 
     //testCode
